@@ -67,9 +67,9 @@ while True:
                                 if len(hourly_range) == 1:
                                     message += f"\n𝗛𝗢𝗨𝗥𝗟𝗬 : {hourly_range[0].strip()}"
                                 # budget
-                                budget = re.findall('𝗕𝗨𝗗𝗚𝗘𝗧:(.*?)<br />', text)
+                                budget = re.findall('<b>Budget</b>:(.*?)<br />', text)
                                 if len(budget) == 1:
-                                    message += f"\n *BUDGET* : {budget[0].strip()}"
+                                    message += f"\n𝗕𝗨𝗗𝗚𝗘𝗧 : {budget[0].strip()}"
 
                                 # category
                                 category = re.findall('<b>Category</b>:(.*?)<br />', text)
