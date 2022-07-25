@@ -62,7 +62,10 @@ while True:
                                 budget = re.findall('<b>Budget</b>:(.*?)<br />', text)
                                 if len(budget) == 1:
                                     message += f"\n𝗕𝗨𝗗𝗚𝗘𝗧 : {budget[0].strip()}"
-
+                                # country
+                                country = re.findall('<b>Country</b>:(.*?)<br />', text)
+                                if len(country) == 1:
+                                    message += f"\n𝗖𝗢𝗨𝗡𝗧𝗥𝗬 : {country[0].strip()}"
                                 # category
                                 category = re.findall('<b>Category</b>:(.*?)<br />', text)
                                 if len(category) == 1:
