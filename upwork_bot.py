@@ -19,7 +19,6 @@ CHAT_ID = '772146169'
 tb = telebot.TeleBot(TOKEN)
 search_terms = ['python developer',
                 'scraping',
-                'scripting',
                 'software engineer',
                 'backend developer',
                 'full time developer']
