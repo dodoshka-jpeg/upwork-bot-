@@ -35,6 +35,7 @@ while True:
                 if child.tag == '{http://www.w3.org/2005/Atom}entry':
                     message = f"""Hi! new upwork job posted!\n"""
                     is_present = True
+                    is_fresh = False
                     for entry_child in child:
                         if entry_child.tag == '{http://www.w3.org/2005/Atom}id':
                             job_url = entry_child.text.replace('?source=rss', '')
@@ -67,7 +68,8 @@ while True:
                                 category = re.findall('<b>Category</b>:(.*?)<br />', text)
                                 if len(category) == 1:
                                     message += f"\n𝗖𝗔𝗧𝗘𝗚𝗢𝗥𝗬 : {category[0].strip()}"
-                    if not is_present:
+                                is_fresh = True
+                    if not is_present and is_fresh:
                         tb.send_message(CHAT_ID, message)
         else:
             tb.send_message(CHAT_ID, f'𝗘𝗥𝗥𝗢𝗥 : {st}\n{response.text}\n{response.status_code} ')
