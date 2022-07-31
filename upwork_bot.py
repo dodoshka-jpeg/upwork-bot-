@@ -10,11 +10,10 @@ from dateutil import parser
 from datetime import datetime
 from dateutil.tz import gettz
 import redis
-
+from config import TOKEN, CHAT_ID
 
 r = redis.Redis()
-TOKEN = "5465920435:AAGhPtezNseQr0wiIPwtoMT6HQRtY2GEWO8"
-CHAT_ID = '772146169'
+
 
 tb = telebot.TeleBot(TOKEN)
 search_terms = ['python developer',
@@ -72,7 +71,10 @@ while True:
                                     message += f"\n𝗖𝗔𝗧𝗘𝗚𝗢𝗥𝗬 : {category[0].strip()}"
                                 is_fresh = True
                     if not is_present and is_fresh:
-                        tb.send_message(CHAT_ID, message)
+                        try:
+                            tb.send_message(CHAT_ID, message)
+                        except Exception as e:
+                            print(f'Error : {str(e)}')
         else:
             tb.send_message(CHAT_ID, f'𝗘𝗥𝗥𝗢𝗥 : {st}\n{response.text}\n{response.status_code} ')
         time.sleep(100)
