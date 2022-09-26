@@ -16,11 +16,9 @@ r = redis.Redis()
 
 
 tb = telebot.TeleBot(TOKEN)
-search_terms = ['python developer',
-                'scraping',
-                'software engineer',
-                'backend developer',
-                'full time developer']
+search_terms = ['python long term',
+                'python full time',
+                'web scraping']
 
 while True:
     for st in search_terms:
