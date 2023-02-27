@@ -18,7 +18,7 @@ r = redis.Redis()
 tb = telebot.TeleBot(TOKEN)
 
 while True:
-    
+
     # new url contains these parameters
     """
     Hourly > $25/hr
@@ -87,6 +87,6 @@ while True:
                     except Exception as e:
                         print(f'Error : {str(e)}')
     else:
-        tb.send_message(CHAT_ID, f'𝗘𝗥𝗥𝗢𝗥 : {st}\n{response.text}\n{response.status_code} ')
+        tb.send_message(CHAT_ID, f'𝗘𝗥𝗥𝗢𝗥 : \n{response.text}\n{response.status_code} ')
     time.sleep(100)
 time.sleep(1200)
