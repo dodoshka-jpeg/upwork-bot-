@@ -18,7 +18,7 @@ r = redis.Redis()
 tb = telebot.TeleBot(TOKEN)
 
 while True:
-    url_string = urllib.parse.quote_plus(st)
+    
     # new url contains these parameters
     """
     Hourly > $25/hr
