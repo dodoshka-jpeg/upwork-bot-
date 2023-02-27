@@ -36,7 +36,7 @@ while True:
     More than 6 months
     Payment verified
     """
-    atom_url = f'https://www.upwork.com/nx/jobs/search/?sort=recency&category2_uid=531770282580668416,531770282580668420,531770282580668419,531770282580668418&t=0&client_hires=0,1-9,10-&proposals=0-4,5-9,10-14&workload=full_time&duration_v3=ongoing&payment_verified=1&hourly_rate=25-'
+    atom_url = f'https://www.upwork.com/ab/feed/jobs/atom?sort=recency&category2_uid=531770282580668416%2C531770282580668420%2C531770282580668419%2C531770282580668418&job_type=hourly&client_hires=0%2C1-9%2C10-&proposals=0-4%2C5-9%2C10-14&workload=full_time&duration_v3=ongoing&verified_payment_only=1&hourly_rate=25-&paging=0%3B50&api_params=1&q=&securityToken=86f7f2309fbbaf6c2851ac3fbc60f9fa1f9d2c1da216a37b4284547b3db87e3d0ad6fd5f170972dbdb01269e109971a68c2a761d4dbe2221a165f8f6f6449751&userUid=1250753516040204288&orgUid=1250753516048592897&ptc=1379092697657143296'
     response = requests.get(atom_url)
     if response.status_code == 200:
         tree = ET.fromstring(response.text)
@@ -87,6 +87,6 @@ while True:
                     except Exception as e:
                         print(f'Error : {str(e)}')
     else:
+        print(response.text)
         tb.send_message(CHAT_ID, f'𝗘𝗥𝗥𝗢𝗥 : \n{response.text}\n{response.status_code} ')
     time.sleep(100)
-time.sleep(1200)
