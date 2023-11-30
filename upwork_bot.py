@@ -36,6 +36,13 @@ while True:
     More than 6 months
     Payment verified
     """
+    filters = [
+        'python',
+        'automation',
+        'script',
+        'scrap',
+        'qa',
+    ]
     atom_url = f'https://www.upwork.com/ab/feed/jobs/atom?sort=recency&category2_uid=531770282580668416%2C531770282580668420%2C531770282580668419%2C531770282580668418&job_type=hourly&client_hires=0%2C1-9%2C10-&proposals=0-4%2C5-9%2C10-14&workload=full_time&duration_v3=ongoing&verified_payment_only=1&hourly_rate=25-&paging=0%3B50&api_params=1&q=&securityToken=86f7f2309fbbaf6c2851ac3fbc60f9fa1f9d2c1da216a37b4284547b3db87e3d0ad6fd5f170972dbdb01269e109971a68c2a761d4dbe2221a165f8f6f6449751&userUid=1250753516040204288&orgUid=1250753516048592897&ptc=1379092697657143296'
     response = requests.get(atom_url)
     if response.status_code == 200:
@@ -45,6 +52,7 @@ while True:
                 message = f"""Hi! new upwork job posted!\n"""
                 is_present = True
                 is_fresh = False
+                is_filtered = True
                 for entry_child in child:
                     if entry_child.tag == '{http://www.w3.org/2005/Atom}id':
                         job_url = entry_child.text.replace('?source=rss', '')
@@ -55,6 +63,12 @@ while True:
                         message += f"\n𝗟𝗜𝗡𝗞 : {job_url}"
                     elif entry_child.tag == '{http://www.w3.org/2005/Atom}title':
                         title = entry_child.text
+                        # filter title based on keywords
+                        for filter in filters:
+                            if filter in title.lower():
+                                is_filtered = False
+                                break
+
                         message += f"\n𝗧𝗜𝗧𝗟𝗘 : {title}"
                     elif entry_child.tag == '{http://www.w3.org/2005/Atom}summary':
                         text = entry_child.text.replace('\r', '').replace('\n', '')
@@ -81,7 +95,7 @@ while True:
                             if len(category) == 1:
                                 message += f"\n𝗖𝗔𝗧𝗘𝗚𝗢𝗥𝗬 : {category[0].strip()}"
                             is_fresh = True
-                if not is_present and is_fresh:
+                if not is_present and is_fresh and not is_filtered:
                     try:
                         tb.send_message(CHAT_ID, message)
                     except Exception as e:
