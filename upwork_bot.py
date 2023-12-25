@@ -33,7 +33,6 @@ while True:
     Less than 5 Proposals
     5 to 10 Proposals
     10 to 15 Proposals
-    More than 6 months
     Payment verified
     """
     filters = [
@@ -43,7 +42,7 @@ while True:
         'scrap',
         'qa',
     ]
-    atom_url = f'https://www.upwork.com/ab/feed/jobs/atom?sort=recency&category2_uid=531770282580668416%2C531770282580668420%2C531770282580668419%2C531770282580668418&job_type=hourly&client_hires=0%2C1-9%2C10-&proposals=0-4%2C5-9%2C10-14&workload=full_time&duration_v3=ongoing&verified_payment_only=1&hourly_rate=25-&paging=0%3B50&api_params=1&q=&securityToken=86f7f2309fbbaf6c2851ac3fbc60f9fa1f9d2c1da216a37b4284547b3db87e3d0ad6fd5f170972dbdb01269e109971a68c2a761d4dbe2221a165f8f6f6449751&userUid=1250753516040204288&orgUid=1250753516048592897&ptc=1379092697657143296'
+    atom_url = f'https://www.upwork.com/ab/feed/jobs/atom?budget=500-999%2C1000-4999%2C5000-&category2_uid=531770282580668416%2C531770282580668420%2C531770282580668419%2C531770282580668418&client_hires=1-9%2C10-&hourly_rate=20-&verified_payment_only=1&proposals=0-4%2C5-9%2C10-14&q=scraping&sort=recency&job_type=hourly%2Cfixed&paging=0%3B10&api_params=1&securityToken=86f7f2309fbbaf6c2851ac3fbc60f9fa1f9d2c1da216a37b4284547b3db87e3d0ad6fd5f170972dbdb01269e109971a68c2a761d4dbe2221a165f8f6f6449751&userUid=1250753516040204288&orgUid=1250753516048592897&ptc=1379092697657143296'
     response = requests.get(atom_url)
     if response.status_code == 200:
         tree = ET.fromstring(response.text)
